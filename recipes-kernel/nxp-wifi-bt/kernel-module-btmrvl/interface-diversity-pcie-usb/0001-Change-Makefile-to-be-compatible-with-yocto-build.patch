@@ -1,33 +1,45 @@
+From 9397d120618abd268c12941479a40f352a23b51a Mon Sep 17 00:00:00 2001
+From: Your Name <you@example.com>
+Date: Fri, 15 Mar 2024 09:34:40 -0300
+Subject: [PATCH] Change Makefile to be compatible with yocto build
+
+---
+ Makefile | 22 ++++++----------------
+ 1 file changed, 6 insertions(+), 16 deletions(-)
+
 diff --git a/Makefile b/Makefile
-index 707f280..52fd183 100755
+index a857756..12ffa8a 100755
 --- a/Makefile
 +++ b/Makefile
-@@ -2,12 +2,6 @@
- # Copyright 2014-2020 NXP
- #
+@@ -5,9 +5,6 @@
+ CC ?=		$(CROSS_COMPILE)gcc
+ LD ?=		$(CROSS_COMPILE)ld
  
--CC ?=		$(CROSS_COMPILE)gcc
--LD ?=		$(CROSS_COMPILE)ld
--
 -BACKUP=		/root/backup
 -YMD=		`date +%Y%m%d%H%M`
 -
  #############################################################################
  # Configuration Options
  #############################################################################
-@@ -62,11 +56,6 @@ endif
+@@ -53,17 +50,6 @@ ifeq ($(CONFIG_USB8997), y)
+ endif
  
  
- 
+-
+-
+-
+-
+-
+-
+-
 -KERNELVERSION_X86 := 	$(shell uname -r)
 -KERNELDIR?=/lib/modules/$(KERNELVERSION_X86)/build
 -
--EXTRA_CFLAGS += -I$(KERNELDIR)/include
 -
  EXTRA_CFLAGS += -I$(M)/bt
  LD += -S
  
-@@ -110,12 +99,12 @@ btxxx-objs := $(BTOBJS)
+@@ -104,12 +90,12 @@ btxxx-objs := $(BTOBJS)
  # Otherwise we were called directly from the command line; invoke the kernel build system.
  else
  default:
@@ -42,13 +54,15 @@ index 707f280..52fd183 100755
  
  #.PHONY: app/fm_app clean distclean
  .PHONY: app/btapp clean distclean
-@@ -158,6 +147,9 @@ clean:
+@@ -172,4 +158,8 @@ distclean:
+ 	-rm -rf .tmp_versions
  #	$(MAKE) -C app/fm_app $@
  	$(MAKE) -C app/btapp $@
- 
++
 +modules_install:
 +	$(MAKE) -C $(KERNEL_SRC) M=$(PWD) modules_install
 +
- install: default
- 
- distclean:
+ # End of file;
+-- 
+2.25.1
+

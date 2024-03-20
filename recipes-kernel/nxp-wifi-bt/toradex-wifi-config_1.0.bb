@@ -13,11 +13,11 @@ SRC_URI = " \
 "
 
 WIFI_CONFIG_FILE_SUFFIX="mwifiex"
-WIFI_CONFIG_FILE_SUFFIX_default-nxp-proprietary-driver="mlan"
+WIFI_CONFIG_FILE_SUFFIX:default-nxp-proprietary-driver="mlan"
 
 do_install () {
 	install -d ${D}${sysconfdir}/modprobe.d/
 	install -m 0644 ${WORKDIR}/${PN}-${WIFI_CONFIG_FILE_SUFFIX}.conf ${D}${sysconfdir}/modprobe.d/${PN}.conf
 }
 
-FILES_${PN} = "${sysconfdir}/modprobe.d/${PN}.conf"
+FILES:${PN} = "${sysconfdir}/modprobe.d/${PN}.conf"

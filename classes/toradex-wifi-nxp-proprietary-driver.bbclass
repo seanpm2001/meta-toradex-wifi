@@ -8,39 +8,42 @@
 #       MACHINEOVERRIDES =. "default-nxp-proprietary-driver:"
 #
 
-MACHINEOVERRIDES_prepend_colibri-imx6ull = "interface-diversity-sd-sd:"
-MACHINEOVERRIDES_prepend_colibri-imx8x = "interface-diversity-pcie-usb:"
-MACHINEOVERRIDES_prepend_verdin-imx8mm = "interface-diversity-sd-sd:"
-MACHINEOVERRIDES_prepend_verdin-imx8mp = "interface-diversity-sd-uart:"
-MACHINEOVERRIDES_prepend_apalis-imx8 = "interface-diversity-pcie-usb:"
 
-MACHINE_EXTRA_RDEPENDS_append_interface-diversity-sd-uart = " \
+MACHINEOVERRIDES:prepend:colibri-imx6ull = "interface-diversity-sd-sd:"
+MACHINEOVERRIDES:prepend:colibri-imx8x = "interface-diversity-pcie-usb:"
+MACHINEOVERRIDES:prepend:verdin-imx8mm = "interface-diversity-sd-sd:"
+MACHINEOVERRIDES:prepend:verdin-imx8mp = "interface-diversity-sd-uart:"
+MACHINEOVERRIDES:prepend:apalis-imx8 = "interface-diversity-pcie-usb:"
+
+MACHINE_EXTRA_RDEPENDS:append:interface-diversity-sd-uart = " \
     kernel-module-mlan \
     kernel-module-moal \
     kernel-module-wifimrvl \
+    nxp-wifi-bt-firmware \
     toradex-wifi-config \
 "
 
-MACHINE_EXTRA_RDEPENDS_append_interface-diversity-sd-sd = " \
+MACHINE_EXTRA_RDEPENDS:append:interface-diversity-sd-sd = " \
     kernel-module-mlan \
-    kernel-module-sd8xxx \
-    kernel-module-bt8xxx \
+    kernel-module-btmrvl \
+    kernel-module-btxxx \
+    kernel-module-sdxxx \
+    kernel-module-wifimrvl \
+    nxp-wifi-bt-firmware \
+    toradex-wifi-config \
+"
+
+MACHINE_EXTRA_RDEPENDS:append:interface-diversity-pcie-usb = " \
+    kernel-module-mlan \
+    kernel-module-pciexxx \
+    kernel-module-btxxx \
     kernel-module-wifimrvl \
     kernel-module-btmrvl \
     nxp-wifi-bt-firmware \
     toradex-wifi-config \
 "
-MACHINE_EXTRA_RDEPENDS_append_interface-diversity-pcie-usb = " \
-    kernel-module-mlan \
-    kernel-module-pcie8xxx \
-    kernel-module-bt8xxx \
-    kernel-module-wifimrvl \
-    kernel-module-btmrvl \
-    nxp-wifi-bt-firmware \
-    toradex-wifi-config \
-"
 
-IMAGE_INSTALL_append_mfg-mode = " labtool "
+IMAGE_INSTALL:append:mfg-mode = " labtool "
 
 addhandler toradex_wifi_sanity_handler
 toradex_wifi_sanity_handler[eventmask] = "bb.event.ParseCompleted"
