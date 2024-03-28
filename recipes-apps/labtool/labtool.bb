@@ -7,11 +7,19 @@ SRC_URI = " \
     file://0002-Bypass-problems-with-redefinition-of-min-and-max-std.patch \
     file://0003-Remove-strip-from-the-build.patch \
 "
+SRC_URI:interface-diversity-pcie-usb:mfg-mode = " \
+    ${NXP_PROPRIETARY_DRIVER_LOCATION}/${NXP_PROPRIETARY_MFG_TOOL_FILENAME};subdir=archive \
+    file://0001-Adapt-makefile-for-yocto-build.patch \
+    file://0002-Bypass-problems-with-redefinition-of-min-and-max-std.patch \
+    file://0003-Remove-strip-from-the-build.patch \
+    file://SetUp.ini\
+"
+
 ROOT_HOME="/home/root"
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 
-FILES_${PN} = "${ROOT_HOME}/labtool ${ROOT_HOME}/SetUp.ini"
+FILES:${PN} = "${ROOT_HOME}/labtool ${ROOT_HOME}/SetUp.ini"
 
 addtask labtool_sanity_check before do_fetch
 python do_labtool_sanity_check() {
@@ -37,5 +45,12 @@ do_install() {
     install -m 0644 ${B}/DutApiWiFiBt/SetUp.ini ${D}${ROOT_HOME}
     install -m 0755 ${B}/DutApiWiFiBt/labtool ${D}${ROOT_HOME}
 }
+
+do_install:interface-diversity-pcie-usb:mfg-mode() {
+    install -d ${D}${ROOT_HOME}
+    install -m 0644 ${WORKDIR}/SetUp.ini ${D}${ROOT_HOME}
+    install -m 0755 ${B}/DutApiWiFiBt/labtool ${D}${ROOT_HOME}
+}
+
 
 DEPENDS += "bluez5"

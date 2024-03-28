@@ -87,9 +87,9 @@ $ bitbake tdx-reference-minimal-image
 The toradex-wifi-config recipe will install the /etc/modprobe.d/toradex-wifi-config.conf file with contents similar to the following:
 
 ```
-# blacklist mlan bt8xxx
+# blacklist mlan btxxx
 # install mlan /bin/false
-# install bt8xxx /bin/false
+# install btxxx /bin/false
 
 blacklist mwifiex mwifiex_sdio btmrvl btmrvl_sdio
 install mwifiex /bin/false
@@ -105,15 +105,15 @@ If your build has been configured for manufacturing mode, you will have a binary
 # Dependencies
 
   URI: git://git.toradex.com/meta-toradex-bsp-common
-  branch: dunfell-5.x.y
+  branch: kirkstone-6.x.y
   revision: HEAD
 
   URI: git://git.openembedded.org/bitbake
-  branch: dunfell
+  branch: kirkstone
   revision: HEAD
 
   URI: git://git.openembedded.org/openembedded-core
   layers: meta
-  branch: dunfell
+  branch: kirkstone
   revision: HEAD
 
