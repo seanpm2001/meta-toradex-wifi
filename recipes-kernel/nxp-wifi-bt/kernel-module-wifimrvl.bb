@@ -14,7 +14,7 @@ KERNEL_MODULE_WIFI_INTERFACE:interface-diversity-pcie-usb = "pciexxx"
 KERNEL_MODULE_PROBECONF:append:interface-diversity-sd-uart= " ${KERNEL_MODULE_WIFI_INTERFACE} "
 # this firmware is being renamed on nxp-wifi-bt-firmware.bb, make sure the correct file is loaded
 module_conf_moal:interface-diversity-sd-uart= "options moal cal_data_cfg=nxp/cal_data.conf cfg80211_wext=12 fw_name=nxp/sdiouart8997_combo_v4_proprietary.bin"
-module_conf_moal:interface-diversity-sd-uart:mfg-mode = "options moal cal_data_cfg=none cfg80211_wext=0xf mfg_mode=1 fw_name=nxp/sdio8997_uart_combo.bin"
+module_conf_moal:interface-diversity-sd-uart:mfg-mode = "options moal cal_data_cfg=none cfg80211_wext=0xf mfg_mode=1 fw_name=nxp/sdio8997_uart_combo_proprietary.bin"
 
 KERNEL_MODULE_PROBECONF:append:interface-diversity-sd-sd = " ${KERNEL_MODULE_WIFI_INTERFACE} "
 module_conf_sdxxx:interface-diversity-sd-sd = "options sdxxx cal_data_cfg=nxp/cal_data.conf cfg80211_wext=12"
