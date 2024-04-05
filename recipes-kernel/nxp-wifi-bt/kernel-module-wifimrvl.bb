@@ -38,6 +38,7 @@ SRC_URI:interface-diversity-sd-sd = "\
     file://cal_data.conf \
     file://0001-makefile.patch \
     file://0001-Remove-REGULATORY_IGNORE_STALE_KICKOFF-flag.patch\
+    file://0001-Update-minimum-version-for-sa_data_min-patch.patch\
 "
 
 SRC_URI:interface-diversity-sd-uart = "\
